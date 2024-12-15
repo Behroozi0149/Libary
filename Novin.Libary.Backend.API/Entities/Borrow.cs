@@ -6,6 +6,7 @@ using Novin.Libary.Backend.API.Entities.Base;
 
 namespace Novin.Libary.Backend.API.Entities
 {
+    // قرض گرفتن
     public class Borrow : Thing
     {
         public DateTime BorrowTime { get; set; }
