@@ -12,13 +12,10 @@ namespace Novin.Libary.Backend.API.DB
         public required DbSet<Book> Books { get; set; }
         public required DbSet<Borrow> Borrows { get; set; }
         public required DbSet<Member> Members { get; set; }
-        //  درس جدید
-        // {
         public FirstDB(DbContextOptions options)
             : base(options)
         {
 
         }
-        // }
     }
 }
