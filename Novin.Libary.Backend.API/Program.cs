@@ -8,13 +8,14 @@ builder.Services.AddDbContext<FirstDB>(Options =>
 {
     Options.UseSqlServer(builder.Configuration.GetConnectionString("MainDB"));
 });
+
 builder.Services.AddCors(Options =>
 {
     Options.AddDefaultPolicy(policy =>
     {
         policy.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin();
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
     });
 });
 var app = builder.Build();
@@ -36,13 +37,13 @@ app.MapPost("/books/add", (FirstDB db, Book book) =>
     db.Books.Add(book);
     db.SaveChanges();
 });
-// Book Edit 
+// Book Edit    Exersice
 app.MapPost("/books/edit", (FirstDB db, Book book) =>
 {
     db.Books.Update(book);
     db.SaveChanges();
 });
-// Book Remove
+// Book Remove    Exersice
 app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
 {
     var book = db.Books.Find(id);
@@ -63,13 +64,13 @@ app.MapPost("/members/add", (FirstDB db, Member member) =>
     db.Members.Add(member);
     db.SaveChanges();
 });
-// Member Edit 
+// Member Edit    Exersice
 app.MapPost("/members/edit", (FirstDB db, Member member) =>
 {
     db.Members.Update(member);
     db.SaveChanges();
 });
-// Member Remove
+// Member Remove    Exersice
 app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
 {
     var member = db.Members.Find(id);
@@ -90,13 +91,13 @@ app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
     db.Borrows.Add(borrow);
     db.SaveChanges();
 });
-// Borrow Edit 
+// Borrow Edit    Exersice
 app.MapPost("/borrows/edit", (FirstDB db, Borrow borrow) =>
 {
     db.Borrows.Update(borrow);
     db.SaveChanges();
 });
-// Borrow Remove
+// Borrow Remove    Exersice
 app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
 {
     var borrow = db.Borrows.Find(id);
