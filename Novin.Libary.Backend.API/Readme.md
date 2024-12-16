@@ -5,6 +5,5 @@
 تمرین:
 به هر کدام از این ها *ادیت* و *ریمو* هم اضافه کنید.
 
-Novin.Libary.Frontend = Vacant until further notice
 
 با تشکر از استاد عاشورلو❤️
