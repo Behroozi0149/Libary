@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+#region books
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>
 {
@@ -53,6 +54,8 @@ app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
         db.SaveChanges();
     }
 });
+#endregion
+#region members
 // Member Add
 app.MapPost("/members/add", (FirstDB db, Member member) =>
 {
@@ -80,6 +83,8 @@ app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
         db.SaveChanges();
     }
 });
+#endregion
+#region borrows
 // Borrow Add
 app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 {
@@ -107,4 +112,5 @@ app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
         db.SaveChanges();
     }
 });
+#endregion
 app.Run();

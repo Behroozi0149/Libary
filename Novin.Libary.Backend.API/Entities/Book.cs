@@ -6,9 +6,9 @@ using Novin.Libary.Backend.API.Entities.Base;
 
 namespace Novin.Libary.Backend.API.Entities
 {
+    // کتاب
     public class Book : Thing
     {
-        // کتاب
         public string? Title { get; set; }
         public string? Writer { get; set; }
         public double Price { get; set; }
