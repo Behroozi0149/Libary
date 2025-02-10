@@ -1,0 +1,47 @@
+@if (action=='list') {
+    @if (data && data.length!=0) {
+        <div>
+            <button (click)="addclick()">Add</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Writer</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of data; track $index) {
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.writer}}</td>
+                        <td>{{item.price}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @else {
+    <div>Please Wait!</div>
+    }
+}
+@else {
+    <form>
+        <div>
+            <input id="title" name="title" type="text" placeholder="Title">
+        </div>
+        <div>
+            <input id="writer" name="writer" type="text" placeholder="Writer">
+        </div>
+        <div>
+            <input id="price" name="price" type="text" placeholder="Price">
+        </div>
+        <div>
+            <button>Confirmation</button>
+            <button>Cancellation</button>
+        </div>
+    </form>
+}

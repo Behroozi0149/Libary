@@ -1,0 +1,50 @@
+<!-- @if (action=='list') {
+    @if (data && data.length!=0) {
+        <div>
+            <button (click)="addclick()">Add</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Borrow Time</th>
+                    <th>Return Time</th>
+                    <th>Book ID</th>
+                    <th>Member ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of data; track $index) {
+                    <tr>
+                        <td>{{item.borrowtime}}</td>
+                        <td>{{item.returntime}}</td>
+                        <td>{{item.bookid}}</td>
+                        <td>{{item.memberid}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @else {
+    <div>Please Wait!</div>
+    }
+}
+@else {
+    <form>
+        <div>
+            <input id="borrowtime" name="borrowtime" type="text" placeholder="Borrow Time">
+        </div>
+        <div>
+            <input id="returntime" name="returntime" type="text" placeholder="Return Time">
+        </div>
+        <div>
+            <input id="bookid" name="bookid" type="text" placeholder="Book ID">
+        </div>
+        <div>
+            <input id="memberid" name="memberid" type="text" placeholder="Member ID">
+        </div>
+        <div>
+            <button>Confirmation</button>
+            <button>Cancellation</button>
+        </div>
+    </form>
+} -->
