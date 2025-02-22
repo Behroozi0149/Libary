@@ -25,30 +25,36 @@
         </table>
     }
     @else {
-        <div class="typing-indicator">
-            <div class="typing-circle"></div>
-            <div class="typing-circle"></div>
-            <div class="typing-circle"></div>
-            <div class="typing-shadow"></div>
-            <div class="typing-shadow"></div>
-            <div class="typing-shadow"></div>
+        <div class="spinner center">
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
+            <div class="spinner-blade"></div>
         </div>
     }
 }
 @else {
-    <form>
+    <form class="addbook">
         <div>
-            <input id="title" name="title" type="text" placeholder="Title">
+            <input id="title" name="title" type="text" class="addbookt" placeholder="Title">
         </div>
         <div>
-            <input id="writer" name="writer" type="text" placeholder="Writer">
+            <input id="writer" name="writer" type="text" class="addbookw" placeholder="Writer">
         </div>
         <div>
-            <input id="price" name="price" type="text" placeholder="Price">
+            <input id="price" name="price" type="text" class="addbookp" placeholder="Price">
         </div>
         <div>
-            <button>Confirmation</button>
-            <button>Cancellation</button>
+            <button class="conf">Confirmation</button>
+            <button class="conc">Cancellation</button>
         </div>
     </form>
 }
