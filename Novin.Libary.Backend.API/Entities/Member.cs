@@ -6,7 +6,6 @@ using Novin.Libary.Backend.API.Entities.Base;
 
 namespace Novin.Libary.Backend.API.Entities
 {
-    // عضو
     public class Member : Thing
     {
         public string? Fullname { get; set; }

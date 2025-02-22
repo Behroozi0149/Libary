@@ -6,7 +6,6 @@ using Novin.Libary.Backend.API.Entities.Base;
 
 namespace Novin.Libary.Backend.API.Entities
 {
-    // کتاب
     public class Book : Thing
     {
         public string? Title { get; set; }

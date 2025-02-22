@@ -26,7 +26,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-#region books
+#region Books
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>
 {
@@ -36,15 +36,16 @@ app.MapPost("/books/add", (FirstDB db, Book book) =>
 // Book List
 app.MapGet("/books/list", (FirstDB db) =>
 {
+    Thread.Sleep(1000);
     return db.Books.ToList();
 });
-// Book Edit    Exersice
+// Book Edit
 app.MapPost("/books/edit", (FirstDB db, Book book) =>
 {
     db.Books.Update(book);
     db.SaveChanges();
 });
-// Book Remove    Exersice
+// Book Remove
 app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
 {
     var book = db.Books.Find(id);
@@ -55,7 +56,7 @@ app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
     }
 });
 #endregion
-#region members
+#region Members
 // Member Add
 app.MapPost("/members/add", (FirstDB db, Member member) =>
 {
@@ -65,15 +66,16 @@ app.MapPost("/members/add", (FirstDB db, Member member) =>
 // Member List
 app.MapGet("/members/list", (FirstDB db) =>
 {
+    Thread.Sleep(1000);
     return db.Members.ToList();
 });
-// Member Edit    Exersice
+// Member Edit
 app.MapPost("/members/edit", (FirstDB db, Member member) =>
 {
     db.Members.Update(member);
     db.SaveChanges();
 });
-// Member Remove    Exersice
+// Member Remove
 app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
 {
     var member = db.Members.Find(id);
@@ -84,7 +86,7 @@ app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
     }
 });
 #endregion
-#region borrows
+#region Borrows
 // Borrow Add
 app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 {
@@ -94,15 +96,16 @@ app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 // Borrow List
 app.MapGet("/borrow/list", (FirstDB db) =>
 {
+    Thread.Sleep(1000);
     return db.Borrows.Include(m => m.Book).Include(m => m.Member).ToList();
 });
-// Borrow Edit    Exersice
+// Borrow Edit
 app.MapPost("/borrows/edit", (FirstDB db, Borrow borrow) =>
 {
     db.Borrows.Update(borrow);
     db.SaveChanges();
 });
-// Borrow Remove    Exersice
+// Borrow Remove
 app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
 {
     var borrow = db.Borrows.Find(id);
