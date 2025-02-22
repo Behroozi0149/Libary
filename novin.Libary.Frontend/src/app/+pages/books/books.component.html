@@ -1,7 +1,7 @@
 @if (action=='list') {
     @if (data && data.length!=0) {
         <div>
-            <button (click)="addclick()">Add</button>
+            <button type="button" class="btn btn-secondary btn-sm" (click)="addclick()" >Add</button>
         </div>
         <table>
             <thead>
@@ -25,7 +25,14 @@
         </table>
     }
     @else {
-    <div>Please Wait!</div>
+        <div class="typing-indicator">
+            <div class="typing-circle"></div>
+            <div class="typing-circle"></div>
+            <div class="typing-circle"></div>
+            <div class="typing-shadow"></div>
+            <div class="typing-shadow"></div>
+            <div class="typing-shadow"></div>
+        </div>
     }
 }
 @else {
