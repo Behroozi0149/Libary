@@ -30,6 +30,7 @@ app.UseHttpsRedirection();
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>
 {
+    Thread.Sleep(100);
     db.Books.Add(book);
     db.SaveChanges();
 });
@@ -42,12 +43,14 @@ app.MapGet("/books/list", (FirstDB db) =>
 // Book Edit
 app.MapPost("/books/edit", (FirstDB db, Book book) =>
 {
+    Thread.Sleep(100);
     db.Books.Update(book);
     db.SaveChanges();
 });
 // Book Remove
 app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
 {
+    Thread.Sleep(100);
     var book = db.Books.Find(id);
     if (book != null)
     {
@@ -60,6 +63,7 @@ app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
 // Member Add
 app.MapPost("/members/add", (FirstDB db, Member member) =>
 {
+    Thread.Sleep(100);
     db.Members.Add(member);
     db.SaveChanges();
 });
@@ -72,12 +76,14 @@ app.MapGet("/members/list", (FirstDB db) =>
 // Member Edit
 app.MapPost("/members/edit", (FirstDB db, Member member) =>
 {
+    Thread.Sleep(100);
     db.Members.Update(member);
     db.SaveChanges();
 });
 // Member Remove
 app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
 {
+    Thread.Sleep(100);
     var member = db.Members.Find(id);
     if (member != null)
     {
@@ -90,6 +96,7 @@ app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
 // Borrow Add
 app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 {
+    Thread.Sleep(100);
     db.Borrows.Add(borrow);
     db.SaveChanges();
 });
@@ -102,12 +109,14 @@ app.MapGet("/borrow/list", (FirstDB db) =>
 // Borrow Edit
 app.MapPost("/borrows/edit", (FirstDB db, Borrow borrow) =>
 {
+    Thread.Sleep(100);
     db.Borrows.Update(borrow);
     db.SaveChanges();
 });
 // Borrow Remove
 app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
 {
+    Thread.Sleep(100);
     var borrow = db.Borrows.Find(id);
     if (borrow != null)
     {
