@@ -1,7 +1,7 @@
 @if (action=='list') {
     @if (data && data.length!=0) {
         <div>
-            <button type="button" class="btn btn-secondary btn-sm" (click)="addclick()" >Add</button>
+            <button class="add-button" (click)="addclick()">Add Book</button>
         </div>
         <table>
             <thead>
@@ -42,19 +42,21 @@
     }
 }
 @else {
-    <form class="addbook">
-        <div>
-            <input id="title" name="title" type="text" class="addbookt" placeholder="Title">
+     <div class="add-book-form">
+        <h2>Add New Book</h2>
+        <label for="title">Title:</label>
+        <input type="text" id="title" placeholder="Enter book title">
+    
+        <label for="writer">Writer:</label>
+        <input type="text" id="writer" placeholder="Enter writer's name">
+    
+        <label for="price">Price:</label>
+        <input type="number" id="price" placeholder="Enter book price">
+    
+        <div class="form-buttons">
+            <button class="cancel-btn">Cancel</button>
+            <button class="confirm-btn">Confirm</button>
         </div>
-        <div>
-            <input id="writer" name="writer" type="text" class="addbookw" placeholder="Writer">
-        </div>
-        <div>
-            <input id="price" name="price" type="text" class="addbookp" placeholder="Price">
-        </div>
-        <div>
-            <button class="conf">Confirmation</button>
-            <button class="conc">Cancellation</button>
-        </div>
-    </form>
+    </div>
+    
 }
