@@ -45,17 +45,17 @@
      <div class="add-book-form">
         <h2>Add New Book</h2>
         <label for="title">Title:</label>
-        <input type="text" id="title" placeholder="Enter book title">
+        <input [(ngModel)]="entity.title" type="text" id="title" placeholder="Enter book title">
     
         <label for="writer">Writer:</label>
-        <input type="text" id="writer" placeholder="Enter writer's name">
+        <input [(ngModel)]="entity.writer" type="text" id="writer" placeholder="Enter writer's name">
     
         <label for="price">Price:</label>
-        <input type="number" id="price" placeholder="Enter book price" min="0">
+        <input [(ngModel)]="entity.price" type="number" id="price" placeholder="Enter book price" min="0">
     
         <div class="form-buttons">
-            <button class="cancel-btn">Cancel</button>
-            <button class="confirm-btn">Confirm</button>
+            <button  (click)="ok()" class="confirm-btn">Confirm</button>
+            <button (click)="cancel()" class="cancel-btn">Cancel</button>
         </div>
     </div>
     
