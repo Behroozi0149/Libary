@@ -1,7 +1,7 @@
 @if (action=='list') {
     @if (data && data.length!=0) {
         <div>
-            <button class="add-button" (click)="addclick()">Add Book</button>
+            <button class="button-one" (click)="addclick()">Add</button>
         </div>
         <table>
             <thead>
@@ -10,6 +10,7 @@
                     <th>Title</th>
                     <th>Writer</th>
                     <th>Price</th>
+                    <th>Settings</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,7 +19,11 @@
                         <td>{{item.id}}</td>
                         <td>{{item.title}}</td>
                         <td>{{item.writer}}</td>
-                        <td>{{item.price}}</td>
+                        <td>{{ item.price | number }} <strong>T</strong></td>
+                        <td>
+                            <button (click)="editclick(item)" class="button-one">Edit</button>
+                            <button (click)="deleteclick(item)" class="button-one">Delete</button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -42,8 +47,8 @@
     }
 }
 @else {
-     <div class="add-book-form">
-        <h2>Add New Book</h2>
+     <div class="book-form">
+        <h2>Book</h2>
         <label for="title">Title:</label>
         <input [(ngModel)]="entity.title" type="text" id="title" placeholder="Enter book title">
     

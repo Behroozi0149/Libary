@@ -1,12 +1,14 @@
+import { DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,DecimalPipe],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })
@@ -35,6 +37,13 @@ export class BooksComponent implements OnInit {
     this.http.get('http://localhost:5178/books/list').subscribe(res => {
       this.data = res as any[];
     })
+  }
+  editclick(item: any) {
+    this.action = 'edit';
+    this.entity = item;
+  }
+  deleteclick(_t12: any) {
+    throw new Error('Method not implemented.');
   }
   ok() {
     if (this.action == 'add') {

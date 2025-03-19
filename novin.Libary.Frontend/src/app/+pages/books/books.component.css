@@ -2,9 +2,8 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  background: #2c2f3300;
+  background: #2c2f3307;
   color: rgb(69, 69, 69);
-  font-family: Arial, sans-serif;
 }
 
 thead {
@@ -170,30 +169,31 @@ tbody tr:hover {
   }
 }
 
-/* add book button */
-.add-button {
+/* button 1 */
+.button-one {
   background-color: #3b3f45;
   color: #ffffff;
   border: none;
-  padding: 0.7em 1.5em;
+  padding: 0.7em 1em;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
+  margin: 5px;
 }
 
-.add-button:hover {
+.button-one:hover {
   background: #4a4e55;
   transform: scale(1.05);
 }
 
-.add-button:active {
+.button-one:active {
   transform: scale(0.95);
 }
 
-/* add book form */
-.add-book-form {
+/*book form*/
+.book-form {
   background: #252525;
   color: #d4d4d4;
   padding: 1.5em;
@@ -208,17 +208,17 @@ tbody tr:hover {
   margin-top: 25px;
 }
 
-.add-book-form h2 {
+.book-form h2 {
   margin-bottom: 0.5em;
   text-align: center;
   font-size: 1.2rem;
 }
 
-.add-book-form label {
+.book-form label {
   font-weight: bold;
 }
 
-.add-book-form input {
+.book-form input {
   padding: 0.5em;
   border-radius: 6px;
   border: none;
