@@ -37,7 +37,7 @@ app.MapPost("/books/add", (FirstDB db, Book book) =>
 // Book List
 app.MapGet("/books/list", (FirstDB db) =>
 {
-    Thread.Sleep(1000);
+    Thread.Sleep(500);
     return db.Books.ToList();
 });
 // Book Edit
@@ -58,6 +58,13 @@ app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
         db.SaveChanges();
     }
 });
+// Remove All Books
+app.MapPost("/books/removeall", (FirstDB db) =>
+{
+    Thread.Sleep(100);
+    db.Books.RemoveRange(db.Books);
+    db.SaveChanges();
+});
 #endregion
 #region Members
 // Member Add
@@ -70,7 +77,7 @@ app.MapPost("/members/add", (FirstDB db, Member member) =>
 // Member List
 app.MapGet("/members/list", (FirstDB db) =>
 {
-    Thread.Sleep(1000);
+    Thread.Sleep(500);
     return db.Members.ToList();
 });
 // Member Edit
@@ -91,6 +98,13 @@ app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
         db.SaveChanges();
     }
 });
+// Remove All Members
+app.MapPost("/members/removeall", (FirstDB db) =>
+{
+    Thread.Sleep(100);
+    db.Members.RemoveRange(db.Members);
+    db.SaveChanges();
+});
 #endregion
 #region Borrows
 // Borrow Add
@@ -103,7 +117,7 @@ app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 // Borrow List
 app.MapGet("/borrow/list", (FirstDB db) =>
 {
-    Thread.Sleep(1000);
+    Thread.Sleep(500);
     return db.Borrows.Include(m => m.Book).Include(m => m.Member).ToList();
 });
 // Borrow Edit
@@ -123,6 +137,13 @@ app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
         db.Borrows.Remove(borrow);
         db.SaveChanges();
     }
+});
+// Remove All Books
+app.MapPost("/borrows/removeall", (FirstDB db) =>
+{
+    Thread.Sleep(100);
+    db.Borrows.RemoveRange(db.Borrows);
+    db.SaveChanges();
 });
 #endregion
 app.Run();
