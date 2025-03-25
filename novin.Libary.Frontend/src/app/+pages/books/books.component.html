@@ -15,7 +15,7 @@
             </thead>
             <tbody>
                 @for (item of data; track $index) {
-                    <tr>
+                    <tr class="scroll-row">
                         <td>{{item.id}}</td>
                         <td>{{item.title}}</td>
                         <td>{{item.writer}}</td>
@@ -27,7 +27,7 @@
                     </tr>
                 }
             </tbody>
-        </table>
+        </table>        
     }
     @else {
         <div class="spinner center">

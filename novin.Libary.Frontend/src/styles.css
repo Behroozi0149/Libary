@@ -1,5 +1,11 @@
-body{
+body {
     direction: ltr;
-    background-color: #bdc3c7e8;
+    background-color: #e3e8e9ee;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+html {
+    scroll-behavior:smooth;
+    overflow-x: hidden;
+}
+  

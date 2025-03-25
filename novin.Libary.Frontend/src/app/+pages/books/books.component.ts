@@ -12,6 +12,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
 })
+
 export class BooksComponent implements OnInit {
   http = inject(HttpClient)
   data: any[] = [];
@@ -54,3 +55,4 @@ export class BooksComponent implements OnInit {
     }
   }
 }
+
