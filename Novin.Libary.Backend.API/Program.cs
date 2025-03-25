@@ -37,7 +37,7 @@ app.MapPost("/books/add", (FirstDB db, Book book) =>
 // Book List
 app.MapGet("/books/list", (FirstDB db) =>
 {
-    Thread.Sleep(500);
+    Thread.Sleep(1000);
     return db.Books.ToList();
 });
 // Book Edit
@@ -77,7 +77,7 @@ app.MapPost("/members/add", (FirstDB db, Member member) =>
 // Member List
 app.MapGet("/members/list", (FirstDB db) =>
 {
-    Thread.Sleep(500);
+    Thread.Sleep(1000);
     return db.Members.ToList();
 });
 // Member Edit
@@ -117,7 +117,7 @@ app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
 // Borrow List
 app.MapGet("/borrow/list", (FirstDB db) =>
 {
-    Thread.Sleep(500);
+    Thread.Sleep(1000);
     return db.Borrows.Include(m => m.Book).Include(m => m.Member).ToList();
 });
 // Borrow Edit
