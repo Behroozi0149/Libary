@@ -1,11 +1,10 @@
 body {
     direction: ltr;
-    background-color: #e3e8e9ee;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #F1F3F3;
+    font-family: 'Merriweather', serif;
 }
 
 html {
-    scroll-behavior:smooth;
+    scroll-behavior: smooth;
     overflow-x: hidden;
 }
-  
