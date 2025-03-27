@@ -30,20 +30,27 @@
         </table>        
     }
     @else {
-        <div class="spinner center">
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
-            <div class="spinner-blade"></div>
+        <div class="loader">
+            <div class="book" style="animation-delay: 0s;">
+                <div class="cover"></div>
+                <div class="pages">
+                    <div class="page"></div>
+                </div>
+            </div>
+            <div class="book" style="animation-delay: 0.5s;">
+                <div class="cover"></div>
+                <div class="pages">
+                    <div class="page"></div>
+                </div>
+            </div>
+            <div class="book" style="animation-delay: 1s;">
+                <div class="cover"></div>
+                <div class="pages">
+                    <div class="page"></div>
+                </div>
+            </div>
         </div>
+        <div class="loading-text">Loading...</div>
     }
 }
 @else {

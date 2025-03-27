@@ -6,7 +6,10 @@ import { AppComponent } from './app/app.component';
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 
-console.log('WELCOME TO MY WEBSITE')
+console.log('WELCOME');
+console.log('SUPPORT:tahabehroozi0149@gmail.com');
+console.log('INSTAGRAM:taha_behroozi_');
+console.log('TELEGRAM:dev_taha_behroozi');
 // change title
 const titleTag = document.title;
 window.addEventListener("blur", function () {
