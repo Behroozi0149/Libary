@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Novin.Libary.Backend.API.DB;
 
@@ -11,9 +12,11 @@ using Novin.Libary.Backend.API.DB;
 namespace Novin.Libary.Backend.API.Migrations
 {
     [DbContext(typeof(FirstDB))]
-    partial class FirstDBModelSnapshot : ModelSnapshot
+    [Migration("20250327104225_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

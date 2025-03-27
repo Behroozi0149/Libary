@@ -18,7 +18,18 @@ builder.Services.AddCors(Options =>
             .AllowAnyOrigin();
     });
 });
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+builder.Services.AddIdentityApiEndpoints<LibraryUser>(Options =>
+{
+    Options.Password.RequireNonAlphanumeric = false;
+    Options.Password.RequireLowercase = false;
+    Options.Password.RequireUppercase = false;
+})
+    .AddEntityFrameworkStores<FirstDB>();
 var app = builder.Build();
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseCors();
 if (app.Environment.IsDevelopment())
 {
@@ -26,6 +37,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.MapIdentityApi<LibraryUser>();
 #region Books
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>

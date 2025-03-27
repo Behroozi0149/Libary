@@ -10,7 +10,7 @@ console.log('WELCOME TO MY WEBSITE')
 // change title
 const titleTag = document.title;
 window.addEventListener("blur", function () {
-  document.title = "Library management | Waiting🩶";
+  document.title = "Library management | Waiting";
 });
 window.addEventListener("focus", function () {
   document.title = titleTag;
