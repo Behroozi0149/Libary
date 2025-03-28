@@ -38,6 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHttpsRedirection();
 app.MapIdentityApi<LibraryUser>();
+Console.WriteLine("WELCOME");
 #region Books
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>
