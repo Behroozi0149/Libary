@@ -1,5 +1,5 @@
 nav {
-    background-color: #1E3A8A;
+    background: linear-gradient(135deg, rgb(23, 37, 84), rgb(15, 26, 63));
     transition: background-color 0.4s ease, box-shadow 0.4s ease;
     padding: 1em 1.5em;
     display: flex;

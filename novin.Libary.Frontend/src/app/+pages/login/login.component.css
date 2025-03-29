@@ -1,0 +1,142 @@
+.login-form {
+    background: #F5F5DC;
+    color: #1E3A8A;
+    padding: 2em;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    margin: 30px auto;
+    border: 1px solid #D1D5DB;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-form h2 {
+    margin-bottom: 0.5em;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #111827;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.input-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1E3A8A;
+    margin-bottom: 0.3em;
+    display: block;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.input-group input {
+    padding: 1em 1.5em;
+    border-radius: 8px;
+    border: 2px solid #D1D5DB;
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    background: #fff;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.input-group input:focus {
+    border: 2px solid #1E3A8A;
+    box-shadow: 0 0 15px rgba(30, 58, 138, 0.6);
+    background: linear-gradient(135deg, #e3f2fd, #ffffff);
+    transform: scale(1.05);
+}
+
+.input-group input::placeholder {
+    color: #6B7280;
+    font-style: italic;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus::placeholder {
+    color: transparent;
+}
+
+.input-group input:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.cancel-btn,
+.confirm-btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 0.9em 1.5em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-btn {
+    background: #B91C1C;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #991B1B;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(185, 28, 28, 0.4);
+}
+
+.cancel-btn:active {
+    transform: scale(0.95);
+}
+
+.confirm-btn {
+    background: #1E3A8A;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: #172554;
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(30, 58, 138, 0.4);
+}
+
+.confirm-btn:active {
+    transform: scale(0.95);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@media (max-width: 400px) {
+    .login-form {
+        padding: 1.5em;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .confirm-btn {
+        width: 100%;
+    }
+}

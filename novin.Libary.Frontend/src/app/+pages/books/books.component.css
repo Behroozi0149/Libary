@@ -10,7 +10,7 @@ table {
 }
 
 thead {
-  background: #1E3A8A;
+  background: linear-gradient(135deg, rgb(23, 37, 84), rgb(15, 26, 63));
 }
 
 th {
@@ -49,20 +49,22 @@ td {
 }
 
 .button-one {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 0.6em 1.2em;
+  font-size: 0.95rem;
   color: white;
-  background: #1E3A8A;
+  background: linear-gradient(135deg, rgb(30, 58, 138), rgb(23, 37, 84));
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease-in-out;
   font-weight: 500;
+  text-transform: uppercase;
 }
 
 .button-one:hover {
-  background: #162D5B;
-  transform: scale(1.05);
+  background: linear-gradient(135deg, rgb(23, 37, 84), rgb(15, 26, 63));
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(30, 58, 138, 0.4);
 }
 
 @keyframes fadeIn {
@@ -148,6 +150,7 @@ td {
   color: #2c4a9cf7;
 }
 
+/* book form */
 .book-form {
   background: #F5F5DC;
   color: #1E3A8A;
@@ -255,6 +258,7 @@ td {
   box-sizing: border-box;
 }
 
+/* respansive */
 @media (max-width: 1024px) {
   table {
     font-size: 0.95rem;
