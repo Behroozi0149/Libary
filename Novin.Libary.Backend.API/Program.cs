@@ -43,9 +43,12 @@ Console.WriteLine("WELCOME");
 // Book Add
 app.MapPost("/books/add", (FirstDB db, Book book) =>
 {
-    Thread.Sleep(100);
-    db.Books.Add(book);
-    db.SaveChanges();
+    if (book != null && book.Title != null && book.Title.Length > 2)
+    {
+        Thread.Sleep(100);
+        db.Books.Add(book);
+        db.SaveChanges();
+    }
 });
 // Book List
 app.MapGet("/books/list", (FirstDB db) =>
@@ -83,9 +86,12 @@ app.MapPost("/books/removeall", (FirstDB db) =>
 // Member Add
 app.MapPost("/members/add", (FirstDB db, Member member) =>
 {
-    Thread.Sleep(100);
-    db.Members.Add(member);
-    db.SaveChanges();
+    if (member != null && member.Fullname != null && member.Fullname.Length > 2)
+    {
+        Thread.Sleep(100);
+        db.Members.Add(member);
+        db.SaveChanges();
+    }
 });
 // Member List
 app.MapGet("/members/list", (FirstDB db) =>
