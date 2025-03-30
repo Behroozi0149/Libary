@@ -4,7 +4,7 @@
     padding: 2em;
     border-radius: 14px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     gap: 1.5em;
@@ -17,7 +17,7 @@
 .login-form h2 {
     margin-bottom: 0.5em;
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: #111827;
     text-transform: uppercase;
@@ -35,7 +35,7 @@
 }
 
 .input-group input {
-    padding: 1em 1.5em;
+    padding: 1em;
     border-radius: 8px;
     border: 2px solid #D1D5DB;
     font-size: 1.1rem;
@@ -51,21 +51,6 @@
     box-shadow: 0 0 15px rgba(30, 58, 138, 0.6);
     background: linear-gradient(135deg, #e3f2fd, #ffffff);
     transform: scale(1.05);
-}
-
-.input-group input::placeholder {
-    color: #6B7280;
-    font-style: italic;
-    transition: all 0.3s ease;
-}
-
-.input-group input:focus::placeholder {
-    color: transparent;
-}
-
-.input-group input:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transform: scale(1.02);
 }
 
 .form-buttons {
@@ -101,10 +86,6 @@
     box-shadow: 0 6px 15px rgba(185, 28, 28, 0.4);
 }
 
-.cancel-btn:active {
-    transform: scale(0.95);
-}
-
 .confirm-btn {
     background: #1E3A8A;
     color: white;
@@ -116,19 +97,14 @@
     box-shadow: 0 6px 15px rgba(30, 58, 138, 0.4);
 }
 
-.confirm-btn:active {
-    transform: scale(0.95);
-}
-
-*,
-*::before,
-*::after {
+* {
     box-sizing: border-box;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
     .login-form {
         padding: 1.5em;
+        max-width: 100%;
     }
 
     .form-buttons {
