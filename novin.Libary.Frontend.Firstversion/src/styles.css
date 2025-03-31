@@ -1,0 +1,10 @@
+body {
+    direction: ltr;
+    background-color: #F1F3F3;
+    font-family: 'Merriweather', serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
