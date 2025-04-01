@@ -1,4 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  direction: ltr;
+  background-color: #f1f3f3;
+  /* font-family: 'Merriweather', serif; */
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
