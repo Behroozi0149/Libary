@@ -59,9 +59,12 @@ app.MapGet("/books/list", (FirstDB db) =>
 // Book Edit
 app.MapPost("/books/edit", (FirstDB db, Book book) =>
 {
-    Thread.Sleep(100);
-    db.Books.Update(book);
-    db.SaveChanges();
+    if (book != null && book.Title != null && book.Title.Length > 2)
+    {
+        Thread.Sleep(100);
+        db.Books.Update(book);
+        db.SaveChanges();
+    }
 });
 // Book Remove
 app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
@@ -102,9 +105,12 @@ app.MapGet("/members/list", (FirstDB db) =>
 // Member Edit
 app.MapPost("/members/edit", (FirstDB db, Member member) =>
 {
-    Thread.Sleep(100);
-    db.Members.Update(member);
-    db.SaveChanges();
+    if (member != null && member.Fullname != null && member.Fullname.Length > 2)
+    {
+        Thread.Sleep(100);
+        db.Members.Update(member);
+        db.SaveChanges();
+    }
 });
 // Member Remove
 app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>

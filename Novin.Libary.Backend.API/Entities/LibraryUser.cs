@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Novin.Libary.Backend.API.Entities
 {
-    public class LibraryUser:IdentityUser
+    public class LibraryUser : IdentityUser
     {
         public string? fullname { get; set; }
     }
