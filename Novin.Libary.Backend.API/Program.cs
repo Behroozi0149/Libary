@@ -1,174 +1,203 @@
 using Microsoft.EntityFrameworkCore;
 using Novin.Libary.Backend.API.DB;
 using Novin.Libary.Backend.API.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<FirstDB>(Options =>
+builder.Services.AddDbContext<FirstDB>(options =>
 {
-    Options.UseSqlServer(builder.Configuration.GetConnectionString("MainDB"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MainDB"));
 });
-
-builder.Services.AddCors(Options =>
+builder.Services.AddCors(options =>
 {
-    Options.AddDefaultPolicy(policy =>
+    options.AddDefaultPolicy(policy =>
     {
         policy.AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowAnyOrigin();
+              .AllowAnyMethod()
+              .AllowAnyOrigin();
     });
 });
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
-builder.Services.AddIdentityApiEndpoints<LibraryUser>(Options =>
+builder.Services.AddIdentityApiEndpoints<LibraryUser>(options =>
 {
-    Options.Password.RequireNonAlphanumeric = false;
-    Options.Password.RequireLowercase = false;
-    Options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
 })
-    .AddEntityFrameworkStores<FirstDB>();
+.AddEntityFrameworkStores<FirstDB>();
+
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseCors();
+
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseCors();
+
 app.MapIdentityApi<LibraryUser>();
-Console.WriteLine("WELCOME");
+
 #region Books
 // Book Add
-app.MapPost("/books/add", (FirstDB db, Book book) =>
+app.MapPost("/books/add", async (FirstDB db, Book book) =>
 {
-    if (book != null && book.Title != null && book.Title.Length > 2)
+    if (book != null && !string.IsNullOrWhiteSpace(book.Title) && book.Title.Length > 2)
     {
-        Thread.Sleep(100);
-        db.Books.Add(book);
-        db.SaveChanges();
+        await db.Books.AddAsync(book);
+        await db.SaveChangesAsync();
+        return Results.Ok(book);
     }
+    return Results.BadRequest("Invalid book data.");
 });
+
 // Book List
-app.MapGet("/books/list", (FirstDB db) =>
+app.MapGet("/books/list", async (FirstDB db) =>
 {
-    Thread.Sleep(2500);
-    return db.Books.ToList();
+    var books = await db.Books.ToListAsync();
+    return Results.Ok(books);
 });
+
 // Book Edit
-app.MapPost("/books/edit", (FirstDB db, Book book) =>
+app.MapPost("/books/edit", async (FirstDB db, Book book) =>
 {
-    if (book != null && book.Title != null && book.Title.Length > 2)
+    if (book != null && !string.IsNullOrWhiteSpace(book.Title) && book.Title.Length > 2)
     {
-        Thread.Sleep(100);
         db.Books.Update(book);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
+        return Results.Ok(book);
     }
+    return Results.BadRequest("Invalid book data.");
 });
+
 // Book Remove
-app.MapPost("/books/remove/{id}", (FirstDB db, int id) =>
+app.MapPost("/books/remove/{id}", async (FirstDB db, int id) =>
 {
-    Thread.Sleep(100);
-    var book = db.Books.Find(id);
+    var book = await db.Books.FindAsync(id);
     if (book != null)
     {
         db.Books.Remove(book);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
+        return Results.Ok();
     }
+    return Results.NotFound("Book not found.");
 });
+
 // Remove All Books
-app.MapPost("/books/removeall", (FirstDB db) =>
+app.MapPost("/books/removeall", async (FirstDB db) =>
 {
-    Thread.Sleep(100);
     db.Books.RemoveRange(db.Books);
-    db.SaveChanges();
+    await db.SaveChangesAsync();
+    return Results.Ok();
 });
 #endregion
+
 #region Members
 // Member Add
-app.MapPost("/members/add", (FirstDB db, Member member) =>
+app.MapPost("/members/add", async (FirstDB db, Member member) =>
 {
-    if (member != null && member.Fullname != null && member.Fullname.Length > 2)
+    if (member != null && !string.IsNullOrWhiteSpace(member.Fullname) && member.Fullname.Length > 2)
     {
-        Thread.Sleep(100);
-        db.Members.Add(member);
-        db.SaveChanges();
+        await db.Members.AddAsync(member);
+        await db.SaveChangesAsync();
+        return Results.Ok(member);
     }
+    return Results.BadRequest("Invalid member data.");
 });
+
 // Member List
-app.MapGet("/members/list", (FirstDB db) =>
+app.MapGet("/members/list", async (FirstDB db) =>
 {
-    Thread.Sleep(2500);
-    return db.Members.ToList();
+    var members = await db.Members.ToListAsync();
+    return Results.Ok(members);
 });
+
 // Member Edit
-app.MapPost("/members/edit", (FirstDB db, Member member) =>
+app.MapPost("/members/edit", async (FirstDB db, Member member) =>
 {
-    if (member != null && member.Fullname != null && member.Fullname.Length > 2)
+    if (member != null && !string.IsNullOrWhiteSpace(member.Fullname) && member.Fullname.Length > 2)
     {
-        Thread.Sleep(100);
         db.Members.Update(member);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
+        return Results.Ok(member);
     }
+    return Results.BadRequest("Invalid member data.");
 });
+
 // Member Remove
-app.MapPost("/members/remove/{id}", (FirstDB db, int id) =>
+app.MapPost("/members/remove/{id}", async (FirstDB db, int id) =>
 {
-    Thread.Sleep(100);
-    var member = db.Members.Find(id);
+    var member = await db.Members.FindAsync(id);
     if (member != null)
     {
         db.Members.Remove(member);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
+        return Results.Ok();
     }
+    return Results.NotFound("Member not found.");
 });
+
 // Remove All Members
-app.MapPost("/members/removeall", (FirstDB db) =>
+app.MapPost("/members/removeall", async (FirstDB db) =>
 {
-    Thread.Sleep(100);
     db.Members.RemoveRange(db.Members);
-    db.SaveChanges();
+    await db.SaveChangesAsync();
+    return Results.Ok();
 });
 #endregion
+
 #region Borrows
 // Borrow Add
-app.MapPost("/borrows/add", (FirstDB db, Borrow borrow) =>
+app.MapPost("/borrows/add", async (FirstDB db, Borrow borrow) =>
 {
-    Thread.Sleep(100);
-    db.Borrows.Add(borrow);
-    db.SaveChanges();
+    await db.Borrows.AddAsync(borrow);
+    await db.SaveChangesAsync();
+    return Results.Ok(borrow);
 });
+
 // Borrow List
-app.MapGet("/borrow/list", (FirstDB db) =>
+app.MapGet("/borrow/list", async (FirstDB db) =>
 {
-    Thread.Sleep(2500);
-    return db.Borrows.Include(m => m.Book).Include(m => m.Member).ToList();
+    var borrows = await db.Borrows.Include(b => b.Book).Include(b => b.Member).ToListAsync();
+    return Results.Ok(borrows);
 });
+
 // Borrow Edit
-app.MapPost("/borrows/edit", (FirstDB db, Borrow borrow) =>
+app.MapPost("/borrows/edit", async (FirstDB db, Borrow borrow) =>
 {
-    Thread.Sleep(100);
     db.Borrows.Update(borrow);
-    db.SaveChanges();
+    await db.SaveChangesAsync();
+    return Results.Ok(borrow);
 });
+
 // Borrow Remove
-app.MapPost("/borrows/remove/{id}", (FirstDB db, int id) =>
+app.MapPost("/borrows/remove/{id}", async (FirstDB db, int id) =>
 {
-    Thread.Sleep(100);
-    var borrow = db.Borrows.Find(id);
+    var borrow = await db.Borrows.FindAsync(id);
     if (borrow != null)
     {
         db.Borrows.Remove(borrow);
-        db.SaveChanges();
+        await db.SaveChangesAsync();
+        return Results.Ok();
     }
+    return Results.NotFound("Borrow not found.");
 });
-// Remove All Books
-app.MapPost("/borrows/removeall", (FirstDB db) =>
+
+// Remove All Borrows
+app.MapPost("/borrows/removeall", async (FirstDB db) =>
 {
-    Thread.Sleep(100);
     db.Borrows.RemoveRange(db.Borrows);
-    db.SaveChanges();
+    await db.SaveChangesAsync();
+    return Results.Ok();
 });
 #endregion
+
 app.Run();
