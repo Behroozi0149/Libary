@@ -4,13 +4,17 @@ using Novin.Libary.Backend.API.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Configure services for minimal API documentation (Swagger)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Register EF Core DbContext with SQL Server using the connection string from configuration
 builder.Services.AddDbContext<FirstDB>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MainDB"));
 });
+
+// Configure CORS to allow any origin, method, and header (not secure for production!)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -20,8 +24,12 @@ builder.Services.AddCors(options =>
               .AllowAnyOrigin();
     });
 });
+
+// Enable authentication and authorization services
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+// Configure Identity system with relaxed password rules for simplicity
 builder.Services.AddIdentityApiEndpoints<LibraryUser>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -32,7 +40,7 @@ builder.Services.AddIdentityApiEndpoints<LibraryUser>(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// Enable Swagger UI only in development environment
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -47,7 +55,7 @@ app.UseCors();
 app.MapIdentityApi<LibraryUser>();
 
 #region Books
-// Book Add
+// Endpoint to add a new book if title is valid
 app.MapPost("/books/add", async (FirstDB db, Book book) =>
 {
     if (book != null && !string.IsNullOrWhiteSpace(book.Title) && book.Title.Length > 2)
@@ -56,17 +64,21 @@ app.MapPost("/books/add", async (FirstDB db, Book book) =>
         await db.SaveChangesAsync();
         return Results.Ok(book);
     }
-    return Results.BadRequest("Invalid book data.");
+    return Results.BadRequest(new
+    {
+        Message = "Invalid book data.",
+        Errors = new[] { "Title must be at least 3 characters long." }
+    });
 });
 
-// Book List
+// List all books
 app.MapGet("/books/list", async (FirstDB db) =>
 {
     var books = await db.Books.ToListAsync();
     return Results.Ok(books);
 });
 
-// Book Edit
+// Update book if valid
 app.MapPost("/books/edit", async (FirstDB db, Book book) =>
 {
     if (book != null && !string.IsNullOrWhiteSpace(book.Title) && book.Title.Length > 2)
@@ -75,10 +87,14 @@ app.MapPost("/books/edit", async (FirstDB db, Book book) =>
         await db.SaveChangesAsync();
         return Results.Ok(book);
     }
-    return Results.BadRequest("Invalid book data.");
+    return Results.BadRequest(new
+    {
+        Message = "Invalid book data.",
+        Errors = new[] { "Title must be at least 3 characters long." }
+    });
 });
 
-// Book Remove
+// Remove a book by ID
 app.MapPost("/books/remove/{id}", async (FirstDB db, int id) =>
 {
     var book = await db.Books.FindAsync(id);
@@ -88,10 +104,10 @@ app.MapPost("/books/remove/{id}", async (FirstDB db, int id) =>
         await db.SaveChangesAsync();
         return Results.Ok();
     }
-    return Results.NotFound("Book not found.");
+    return Results.NotFound(new { Message = "Book not found." });
 });
 
-// Remove All Books
+// Delete all books from the database
 app.MapPost("/books/removeall", async (FirstDB db) =>
 {
     db.Books.RemoveRange(db.Books);
@@ -101,7 +117,7 @@ app.MapPost("/books/removeall", async (FirstDB db) =>
 #endregion
 
 #region Members
-// Member Add
+// Add a member with basic validation
 app.MapPost("/members/add", async (FirstDB db, Member member) =>
 {
     if (member != null && !string.IsNullOrWhiteSpace(member.Fullname) && member.Fullname.Length > 2)
@@ -110,17 +126,21 @@ app.MapPost("/members/add", async (FirstDB db, Member member) =>
         await db.SaveChangesAsync();
         return Results.Ok(member);
     }
-    return Results.BadRequest("Invalid member data.");
+    return Results.BadRequest(new
+    {
+        Message = "Invalid member data.",
+        Errors = new[] { "Fullname must be at least 3 characters long." }
+    });
 });
 
-// Member List
+// Get all members
 app.MapGet("/members/list", async (FirstDB db) =>
 {
     var members = await db.Members.ToListAsync();
     return Results.Ok(members);
 });
 
-// Member Edit
+// Edit a member if valid
 app.MapPost("/members/edit", async (FirstDB db, Member member) =>
 {
     if (member != null && !string.IsNullOrWhiteSpace(member.Fullname) && member.Fullname.Length > 2)
@@ -129,10 +149,14 @@ app.MapPost("/members/edit", async (FirstDB db, Member member) =>
         await db.SaveChangesAsync();
         return Results.Ok(member);
     }
-    return Results.BadRequest("Invalid member data.");
+    return Results.BadRequest(new
+    {
+        Message = "Invalid member data.",
+        Errors = new[] { "Fullname must be at least 3 characters long." }
+    });
 });
 
-// Member Remove
+// Remove a member by ID
 app.MapPost("/members/remove/{id}", async (FirstDB db, int id) =>
 {
     var member = await db.Members.FindAsync(id);
@@ -142,10 +166,10 @@ app.MapPost("/members/remove/{id}", async (FirstDB db, int id) =>
         await db.SaveChangesAsync();
         return Results.Ok();
     }
-    return Results.NotFound("Member not found.");
+    return Results.NotFound(new { Message = "Member not found." });
 });
 
-// Remove All Members
+// Delete all members
 app.MapPost("/members/removeall", async (FirstDB db) =>
 {
     db.Members.RemoveRange(db.Members);
@@ -155,7 +179,7 @@ app.MapPost("/members/removeall", async (FirstDB db) =>
 #endregion
 
 #region Borrows
-// Borrow Add
+// Add a borrow record (no validation here, assumes front-end ensures integrity)
 app.MapPost("/borrows/add", async (FirstDB db, Borrow borrow) =>
 {
     await db.Borrows.AddAsync(borrow);
@@ -163,14 +187,14 @@ app.MapPost("/borrows/add", async (FirstDB db, Borrow borrow) =>
     return Results.Ok(borrow);
 });
 
-// Borrow List
+// List all borrows with related Book and Member data
 app.MapGet("/borrow/list", async (FirstDB db) =>
 {
     var borrows = await db.Borrows.Include(b => b.Book).Include(b => b.Member).ToListAsync();
     return Results.Ok(borrows);
 });
 
-// Borrow Edit
+// Update borrow record
 app.MapPost("/borrows/edit", async (FirstDB db, Borrow borrow) =>
 {
     db.Borrows.Update(borrow);
@@ -178,7 +202,7 @@ app.MapPost("/borrows/edit", async (FirstDB db, Borrow borrow) =>
     return Results.Ok(borrow);
 });
 
-// Borrow Remove
+// Delete a borrow by ID
 app.MapPost("/borrows/remove/{id}", async (FirstDB db, int id) =>
 {
     var borrow = await db.Borrows.FindAsync(id);
@@ -188,10 +212,10 @@ app.MapPost("/borrows/remove/{id}", async (FirstDB db, int id) =>
         await db.SaveChangesAsync();
         return Results.Ok();
     }
-    return Results.NotFound("Borrow not found.");
+    return Results.NotFound(new { Message = "Borrow not found." });
 });
 
-// Remove All Borrows
+// Delete all borrow records
 app.MapPost("/borrows/removeall", async (FirstDB db) =>
 {
     db.Borrows.RemoveRange(db.Borrows);
@@ -200,4 +224,4 @@ app.MapPost("/borrows/removeall", async (FirstDB db) =>
 });
 #endregion
 
-app.Run();
+app.Run(); // Start the application
